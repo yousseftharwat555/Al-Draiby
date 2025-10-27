@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EagleWolf — تسجيل الدخول</title>
+  <link rel="stylesheet" href="eaglewolf.css" />
+  <link rel="stylesheet" href="register.css" />
+  <style>
+    .btn-link{ background:none; border:none; color:#0284c7; font-weight:800; cursor:pointer; padding:0 }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container hdr" role="banner">
+      <div class="brand">EagleWolf</div>
+    </div>
+  </header>
+
+  <main class="auth-screen">
+    <form id="loginForm" class="auth-card" novalidate>
+      <div class="auth-head">
+        <h1 class="auth-title">تسجيل الدخول</h1>
+        <p class="auth-sub">أدخل بريدك وكلمة المرور</p>
+      </div>
+
+      <label for="email">البريد الإلكتروني</label>
+      <input id="email" type="email" required placeholder="name@example.com" autocomplete="email" />
+
+      <label for="password">كلمة المرور</label>
+      <input id="password" type="password" required placeholder="••••••••" autocomplete="current-password" />
+
+      <div style="text-align:left; margin:6px 0 12px">
+        <a href="reset.html" class="btn-link">هل نسيت كلمة المرور؟</a>
+      </div>
+
+      <button id="loginBtn" class="btn-primary" type="submit">دخول</button>
+      <p id="lmsg" class="hint" aria-live="polite"></p>
+
+      <div class="auth-footer">
+        <span>ليس لديك حساب؟</span>
+        <a href="register.html">إنشاء حساب</a>
+      </div>
+    </form>
+  </main>
+
+  <script type="module" src="login.js"></script>
+</body>
+</html>

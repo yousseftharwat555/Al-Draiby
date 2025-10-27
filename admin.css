@@ -1,0 +1,213 @@
+/* ========== Admin Dashboard (RTL) ========== */
+:root{
+  --bg:#0f172a;        /* slate-900 */
+  --card:#111827;      /* gray-900 */
+  --muted:#94a3b8;     /* slate-400 */
+  --text:#f8fafc;      /* slate-50 */
+  --accent:#22d3ee;    /* cyan-400 */
+  --danger:#ef4444;    /* red-500 */
+  --ok:#22c55e;        /* green-500 */
+  --border:#1f2937;    /* gray-800 */
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Kufi Arabic", "Cairo", "Tajawal", Ubuntu, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: linear-gradient(180deg, var(--bg), #0b1222);
+  color: var(--text);
+}
+
+.topbar{
+  position:sticky; top:0;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 16px; background:rgba(0,0,0,.4); backdrop-filter: blur(8px);
+  border-bottom:1px solid var(--border);
+}
+.brand{display:flex; align-items:center; gap:8px; font-size:18px}
+.logo{font-size:20px}
+.actions{display:flex; gap:8px}
+
+.container{max-width:1100px; margin:24px auto; padding:0 16px}
+
+.card{
+  background: var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.15);
+}
+
+.card h2{margin:6px 0 14px 0}
+.warning{border-color:#f59e0b40; background: #f59e0b10}
+.warning h3{margin:0 0 6px 0}
+
+.toolbar{
+  display:grid; gap:12px;
+  grid-template-columns: 1fr auto auto;
+  align-items:center;
+}
+.search{display:flex; gap:8px}
+.ban-email{display:flex; gap:8px; justify-self:end}
+
+input[type="text"], input[type="email"]{
+  background:#0b1220;
+  border:1px solid var(--border);
+  border-radius:10px; padding:10px 12px; color:var(--text); outline:none;
+}
+input::placeholder{color:var(--muted)}
+
+.btn{
+  border:1px solid var(--border);
+  background:#0b1220; color:var(--text);
+  padding:10px 14px; border-radius:10px; cursor:pointer;
+}
+.btn:hover{border-color:#334155}
+.btn-ghost{background:transparent}
+.btn-danger{background: #2a0b0b; border-color:#3f1111}
+.btn-danger:hover{background:#3f1111}
+.btn-ok{background:#0b2a18; border-color:#0f3f23}
+.btn-ok:hover{background:#0f3f23}
+
+.table-wrap{overflow:auto; border-radius:12px; border:1px solid var(--border)}
+.table{width:100%; border-collapse: collapse; min-width:900px}
+.table th, .table td{border-bottom:1px solid var(--border); padding:12px}
+.table th{background:#0b1220; text-align:right; color:var(--muted); font-weight:600}
+.table td{vertical-align:middle}
+.badge{padding:4px 8px; border-radius:8px; font-size:12px; border:1px solid var(--border)}
+.badge.banned{background:#3f1111; color:#fecaca; border-color:#7f1d1d}
+.badge.ok{background:#0f3f23; color:#bbf7d0; border-color:#064e3b}
+.muted{color:var(--muted)}
+
+.pagination{display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:12px}
+
+.actions-cell{display:flex; gap:8px; flex-wrap:wrap}
+.uid{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; color:#7dd3fc}
+/* ====== Stats cards ====== */
+.stats{
+  display:grid; gap:12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.stat{
+  background:#0b1220; border:1px solid var(--border);
+  border-radius:12px; padding:14px;
+}
+.stat-label{ color:var(--muted); font-weight:700; margin-bottom:6px }
+.stat-value{ font-size:22px; font-weight:900 }
+
+/* ====== Disclosure (row details) ====== */
+.disc-btn{
+  display:inline-grid; place-items:center;
+  width:36px; height:36px; border-radius:10px;
+  background:#0b1220; border:1px solid var(--border); color:var(--text);
+  cursor:pointer;
+}
+.disc-btn svg{ width:18px; height:18px; transition: transform .2s ease }
+.disc-btn[aria-expanded="true"] svg{ transform: rotate(90deg) }
+
+.details-row td{
+  background:#0b1220; border-bottom:1px solid var(--border);
+  padding:16px;
+}
+.details-grid{
+  display:grid; gap:10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.details-grid div{ color:var(--muted) }
+.details-grid strong{ color:var(--text) }
+
+/* ================= Responsive Enhancements ================= */
+@media (max-width: 900px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .ban-email, .search {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .ban-email input,
+  .search input,
+  .ban-email button,
+  .search button {
+    width: 100%;
+  }
+
+  .table {
+    min-width: unset; /* السماح للجدول يتقلص */
+    font-size: 14px;
+  }
+
+  .table th, .table td {
+    padding: 8px;
+    white-space: nowrap;
+  }
+
+  .actions-cell {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  .topbar {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}
+/* Rotate overlay */
+#rotateOverlay{
+  position: fixed; inset: 0;
+  display: none; /* يظهر فقط عند الحاجة من JS */
+  place-items: center;
+  background: rgba(0,0,0,.8);
+  z-index: 9999;
+}
+#rotateOverlay .box{
+  background: #0b1220; border:1px solid var(--border);
+  padding: 16px; border-radius: 12px; text-align: center; max-width: 320px;
+}
+#rotateOverlay h3{ margin: 0 0 8px; }
+#rotateOverlay p{ color: var(--muted); margin: 0 0 12px; }
+#rotateOverlay .btn{
+  border:1px solid var(--border); background:#111827; color:var(--text);
+  padding:10px 14px; border-radius:10px; cursor:pointer;
+}
+/* Fit table to screen on small devices (no horizontal scroll) */
+@media (max-width: 1024px){
+  .table-wrap{ overflow-x: hidden; } /* منع سحب أفقي */
+  .table{
+    min-width: unset;  /* كان 900px – نشيلها */
+    width: 100%;
+    table-layout: fixed; /* توزيع الأعمدة بالتساوي */
+  }
+  .table th, .table td{
+    white-space: normal;     /* السماح بلف النص */
+    word-break: break-word;  /* كسر سلاسل طويلة */
+    padding: 10px;
+    font-size: 13px;
+    vertical-align: top;
+  }
+  /* تقليل مساحة الأعمدة الثقيلة */
+  .uid{ font-size: 12px; opacity:.9; }
+  .actions-cell{ flex-wrap: wrap; gap:6px; }
+}

@@ -1,0 +1,47 @@
+/* بطاقة */
+.ref-card{
+  background: var(--surface);
+  border: 1px solid rgba(2,132,199,.08);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(2,132,199,.08);
+  padding: 16px;
+  max-width: 640px;
+  margin: 18px auto;
+}
+.ref-head{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px }
+.ref-title{ margin:0; font-size:1.2rem; font-weight:900 }
+.ref-hint{ margin:0; color:var(--muted); font-size:.95rem }
+
+/* فورم */
+.ref-row{ display:grid; grid-template-columns:1fr auto; gap:10px; margin-top:10px }
+.ref-input{
+  width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:10px; font-size:1rem;
+  background:#fff; outline:none;
+}
+.ref-input:focus{ box-shadow:0 0 0 4px var(--ring); border-color:#bae6fd }
+.ref-input[disabled]{ background:#f3f4f6; color:#6b7280 }
+
+.ref-btn{
+  padding:12px 16px; border:none; border-radius:10px; font-weight:800; cursor:pointer;
+  background: linear-gradient(180deg,#0ea5e9,#0284c7); color:#fff; min-width:150px;
+}
+.ref-btn:disabled{ opacity:.65; cursor:not-allowed }
+
+.msg{ margin-top:10px; min-height:22px; font-weight:700 }
+.msg[data-type="ok"]{ color:#065f46 }
+.msg[data-type="error"]{ color:#b91c1c }
+
+/* بطاقة معلومات الداعي */
+.inviter{
+  margin-top:12px; padding:12px; border:1px solid rgba(0,0,0,.06); border-radius:12px; background:#f8fafc;
+  display:none;
+}
+.inviter.show{ display:block }
+.inviter-title{ margin:0 0 6px; font-weight:900; font-size:1rem; color:#0f172a }
+.inviter-sub{ margin:0; color:var(--muted); font-size:.95rem; word-break:break-all }
+
+/* Responsive */
+@media (max-width: 520px){
+  .ref-row{ grid-template-columns:1fr }
+  .ref-btn{ width:100% }
+}

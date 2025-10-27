@@ -1,0 +1,144 @@
+/* =========== أساسيات و تخطيط =========== */
+:root{
+  --ios-bg:#f2f2f7; --ios-card:#fff; --ios-sep:rgba(60,60,67,.29);
+  --ios-blue:#007aff; --ios-text:#0f172a; --ios-muted:#6b7280;
+}
+html,body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--ios-bg); color:var(--ios-text);
+}
+.page-wrap{ min-height:calc(100dvh - 56px); display:grid; grid-template-rows:auto 1fr }
+.edit-card{
+  width:100%; max-width:860px; margin:20px auto; background:var(--ios-card);
+  border-radius:22px; box-shadow:0 8px 28px rgba(0,0,0,.06); overflow:hidden;
+}
+.edit-head{ padding:22px 24px; border-bottom:1px solid var(--ios-sep) }
+.edit-head h1{ margin:0; font-size:22px; font-weight:800 }
+
+.rows{ display:block }
+.row{
+  display:grid; grid-template-columns:170px 1fr auto;
+  gap:14px; align-items:center; padding:16px 20px;
+  border-bottom:1px solid var(--ios-sep)
+}
+.row:last-child{ border-bottom:none }
+.row label{ font-weight:800 }
+
+/* =========== الحقول =========== */
+.row .field input,
+.row .field select{
+  width:100%; height:44px; padding:0 14px; border-radius:12px;
+  border:1px solid rgba(0,0,0,.12); background:#f8f9fb;
+  outline:none; transition:border-color .2s, box-shadow .2s;
+}
+.row .field input:focus,
+.row .field select:focus{ border-color:var(--ios-blue); box-shadow:0 0 0 4px rgba(0,122,255,.15) }
+.row input[disabled], .row select[disabled]{ background:#f5f5f7; color:#475569 }
+
+/* =========== زر التعديل =========== */
+.btn-icon{
+  background:#fff; border:1px solid rgba(0,0,0,.12); border-radius:12px;
+  padding:8px 10px; display:inline-flex; align-items:center; gap:6px;
+  color:var(--ios-blue); font-weight:800; cursor:pointer; transition:transform .05s;
+}
+.btn-icon:active{ transform:scale(.98) }
+.btn-icon svg{ width:18px; height:18px }
+
+/* =========== خانة النوع — رمز فقط (بدون كبسولات/دوائر) =========== */
+.gender-wrap{
+  display:inline-flex; gap:16px;
+  background:transparent; border:0; padding:0;
+}
+.gender-wrap .gender-option{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px; border:0; background:transparent; box-shadow:none; cursor:pointer;
+}
+.gender-wrap .gender-option input{ display:none } /* نخفي الراديو */
+.gender-wrap .gender-option span{
+  font-size:24px; line-height:1; font-weight:800; color:#0ea5e9; user-select:none;
+}
+.gender-wrap .gender-option:has(input:checked) span{
+  color:#0284c7; text-shadow:0 0 4px rgba(2,132,199,.35);
+}
+/* عندما تكون الحقول مقفولة: أظهر الرمز المختار فقط */
+.gender-wrap .gender-option:has(input[disabled]):not(:has(input:checked)){ display:none; }
+
+/* =========== روابط و أزرار أسفل =========== */
+.hint-row{ text-align:center; color:var(--ios-muted); padding:16px 0 }
+.link{ color:var(--ios-blue); font-weight:900; text-decoration:none }
+.link:hover{ text-decoration:underline }
+
+.footer-bar{
+  display:flex; gap:10px; justify-content:center; padding:16px;
+  border-top:1px solid var(--ios-sep); background:#fff;
+}
+.btn-primary{
+  background:var(--ios-blue); color:#fff; border:0; border-radius:12px;
+  padding:12px 22px; font-weight:800; cursor:pointer; transition:opacity .15s;
+}
+.btn-primary:disabled{ opacity:.6; cursor:default }
+.btn-cancel{
+  background:#fff; color:#0f172a; border:1px solid rgba(0,0,0,.15);
+  border-radius:12px; padding:12px 18px; font-weight:800; cursor:pointer;
+}
+
+/* ====== Mobile tune (≤640px): full-bleed + edit btn full width ====== */
+@media (max-width:640px){
+  /* الحاوية تاخد عرض الشاشة بالكامل */
+  main.page-wrap > .container{ padding-left:0; padding-right:0; max-width:100vw }
+  body{ overflow-x:hidden }
+
+  /* الكارت من غير حواف جانبية */
+  .edit-card{ margin:0; border-radius:0; box-shadow:none; width:100vw }
+  .edit-head{ padding:16px }
+  .edit-head h1{ font-size:18px }
+
+  /* كل صف عمود واحد */
+  .row{
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .row label{ font-size:14px; color:#111827 }
+
+  /* الحقول مريحة للمس */
+  .row .field input,
+  .row .field select{
+    height:48px; border-radius:14px; width:100%;
+  }
+
+  /* زر التعديل أسفل البيان وبعرض الحاوية */
+  .btn-icon{
+    display:block;
+    width:100%;
+    justify-content:center;   /* توسيط الأيقونة/النص */
+    margin-top:8px;
+    padding:12px 14px;
+  }
+
+  /* مجموعة النوع متوسّطة */
+  .gender-wrap{ width:100%; justify-content:center }
+  .gender-wrap .gender-option{ padding:10px 14px }
+  
+  /* الأزرار تحت ثابتة */
+  .footer-bar{
+    position:sticky; bottom:0;
+    background:#fff; border-top:1px solid rgba(60,60,67,.29);
+    padding:12px 16px; gap:8px;
+  }
+  .btn-primary, .btn-cancel{
+    width:100%; padding:14px 16px; border-radius:14px;
+  }
+}
+
+/* النوع: رمز فقط — إظهار الاختيار الحالي عند التعطيل */
+.gender-wrap .gender-option:has(input[disabled]):not(:has(input:checked)){ display:none; }
+.gender-wrap .gender-option input{ display:none; }      /* إخفاء الراديو نفسه */
+.gender-wrap .gender-option span{                       /* الرمز ♂/♀ فقط */
+  font-size:24px; line-height:1; font-weight:800; color:#0ea5e9;
+}
+.gender-wrap .gender-option:has(input:checked) span{ color:#0284c7; text-shadow:0 0 4px rgba(2,132,199,.35) }
+
+
+/* شاشات كبيرة شوية */
+@media (min-width:1200px){ .edit-card{ max-width:980px } }

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EagleWolf — الملف الشخصي</title>
+
+  <link rel="stylesheet" href="eaglewolf.css" />
+  <link rel="stylesheet" href="register.css" />
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body data-page="profile">
+  <!-- iOS-style Topbar بسيط -->
+  <header class="topbar">
+    <div class="container hdr"><div class="brand">EagleWolf</div></div>
+  </header>
+
+  <main class="ios-screen">
+    <!-- مساحة العنوان الكبير (مثل Large Title في iOS) -->
+    <div class="ios-title-wrap container">
+      <h1 class="ios-title">الملف الشخصي</h1>
+    </div>
+
+    <div class="container">
+      <!-- Header Row: أفاتار + الاسم / وتحتهم الـID الصغير -->
+      <section class="ios-card ios-header">
+        <div class="ios-header-row">
+          <div class="ios-avatar" aria-hidden="true">
+            <!-- أفاتار افتراضي (SVG) — يمكنك استبداله بصورة -->
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/>
+            </svg>
+          </div>
+
+          <!-- الـJS يملأ الاسم + id-line هنا (لا نعدّل JS) -->
+          <div id="headerArea" class="ios-header-col"></div>
+        </div>
+      </section>
+
+      <!-- Grouped Lists (زي إعدادات iOS) -->
+      <section class="ios-group">
+        <a class="ios-cell" href="profile-edit.html" aria-label="تعديل البيانات">
+          <div class="cell-text">
+            <div class="cell-title">تعديل البيانات</div>
+            <div class="cell-sub">الاسم، اسم الوالد، الهاتف، المحافظة، النوع</div>
+          </div>
+          <span class="cell-chevron" aria-hidden="true">›</span>
+        </a>
+      </section>
+
+      
+
+      <section class="ios-group">
+        <a class="ios-cell" href="referral.html" aria-label="كيف عرفتنا؟">
+          <div class="cell-text">
+            <div class="cell-title">كيف عرفتنا؟</div>
+            <div class="cell-sub">أدخل كود/ID الصديق الذي دعاك</div>
+          </div>
+          <span class="cell-chevron">›</span>
+        </a>
+        <a class="ios-cell" href="privacy.html" aria-label="سياسة الخصوصية">
+          <div class="cell-text">
+            <div class="cell-title">سياسة الخصوصية</div>
+            <div class="cell-sub">كيف نحمي بياناتك</div>
+          </div>
+          <span class="cell-chevron">›</span>
+        </a>
+        <a class="ios-cell" href="refund.html" aria-label="استرداد الأموال">
+          <div class="cell-text">
+            <div class="cell-title">استرداد الأموال</div>
+            <div class="cell-sub">الشروط والأحكام</div>
+          </div>
+          <span class="cell-chevron">›</span>
+        </a>
+      </section>
+      <!-- إشعارات / تنبيهات -->
+      <section class="ios-group" id="notificationsGroup">
+        <div class="ios-cell" aria-disabled="true">
+          <div class="cell-text">
+            <div class="cell-title">التنبيهات</div>
+            <div class="cell-sub">لا توجد رسائل جديدة الآن</div>
+          </div>
+          <span class="cell-chevron" aria-hidden="true">•</span>
+        </div>
+      </section>
+
+      <!-- إدارة الحساب -->
+      <section class="ios-group" id="accountGroup">
+        <div class="ios-cell" aria-label="حالة الحساب">
+          <div class="cell-text">
+            <div class="cell-title">حالة الحساب</div>
+            <div class="cell-sub"><span id="statusBadge" class="badge">Active</span></div>
+          </div>
+          <span class="cell-chevron" aria-hidden="true">›</span>
+        </div>
+
+        <div class="ios-cell" aria-label="آخر تسجيل دخول">
+          <div class="cell-text">
+            <div class="cell-title">آخر تسجيل دخول</div>
+            <div class="cell-sub" id="lastLogin">—</div>
+          </div>
+          <span class="cell-chevron" aria-hidden="true">›</span>
+        </div>
+
+        <div class="ios-cell" aria-label="حذف الحساب">
+          <div class="cell-text">
+            <div class="cell-title">حذف الحساب</div>
+            <div class="cell-sub">سيتم حذف حسابك نهائيًا</div>
+          </div>
+          <button id="deleteBtn" class="link-danger" type="button">حذف</button>
+        </div>
+      </section>
+
+      <!-- Toast للإشعارات الصغيرة -->
+      <div id="toast" class="toast" role="status" aria-live="polite" aria-hidden="true"></div>
+
+
+      <section class="io2">
+        <div class="ios-footer">
+          <button id="logoutBtn" class="ios-danger" type="button">تسجيل الخروج</button>
+          <p id="pmsg" class="hint" aria-live="polite"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- نفس التنقل السفلي -->
+  <nav class="bottom-nav" role="navigation" aria-label="شريط التنقل السفلي">
+    <div class="tabs">
+      
+      <a href="books.html" class="tab" data-target="books" aria-label="الكتب">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M20 22H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20z"/><path d="M8 6.5h8"/></svg>
+        <span class="tab-label">الكتب</span>
+      </a>
+
+      <a href="index.html" class="tab" data-target="home" aria-label="الرئيسية">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/><path d="M9 20v-6h6v6"/></svg>
+        <span class="tab-label">الرئيسية</span>
+      </a>
+      
+      <a href="profile.html" class="tab" data-target="profile" aria-label="الملف الشخصي" aria-current="page">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>
+        <span class="tab-label">الملف الشخصي</span>
+      </a>
+    </div>
+  </nav>
+  <script type="module" src="delete-account.js"></script>
+  <script type="module" src="profile.js"></script>
+</body>
+</html>

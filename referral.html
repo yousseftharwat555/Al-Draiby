@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تفعيل كود الدعوة | EagleWolf</title>
+
+  <link rel="stylesheet" href="eaglewolf.css" />
+  <link rel="stylesheet" href="referral.css" />
+</head>
+<body data-page="referral">
+  <header class="topbar">
+    <div class="container hdr" role="banner">
+      <div class="brand">EagleWolf</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="ref-card" aria-labelledby="refTitle">
+      <div class="ref-head">
+        <h1 id="refTitle" class="ref-title">تفعيل كود الدعوة</h1>
+      </div>
+      <p class="ref-hint">اكتب كودًا بالشكل <strong>EW-XXXXXX</strong> ثم اضغط “تفعيل”.</p>
+
+      <form id="referralForm" novalidate>
+        <div class="ref-row">
+          <input id="inviteCode" class="ref-input" placeholder="EW-XXXXXX" inputmode="latin" autocomplete="off" maxlength="9" />
+          <button id="redeemBtn" class="ref-btn" type="submit">تفعيل الكود</button>
+        </div>
+
+        <!-- معلومات الداعي -->
+        <div id="inviterCard" class="inviter" aria-live="polite" aria-atomic="true">
+          <h3 class="inviter-title">الداعي</h3>
+          <p class="inviter-sub" id="inviterLine">—</p>
+        </div>
+
+        <div id="msg" class="msg" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" role="navigation" aria-label="شريط التنقل السفلي">
+    <div class="tabs">
+      <a href="books.html" class="tab" aria-label="الكتب">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M20 22H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20z"/><path d="M8 6.5h8"/></svg>
+        <span class="tab-label">الكتب</span>
+      </a>
+      <a href="index.html" class="tab" aria-label="الرئيسية">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/><path d="M9 20v-6h6v6"/></svg>
+        <span class="tab-label">الرئيسية</span>
+      </a>
+      <a href="profile.html" class="tab" aria-label="الملف الشخصي">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>
+        <span class="tab-label">الملف الشخصي</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="firebase-init.js"></script>
+  <script type="module" src="referral.js"></script>
+</body>
+</html>

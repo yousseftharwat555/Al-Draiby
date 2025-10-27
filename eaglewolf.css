@@ -1,0 +1,364 @@
+/* ===== EagleWolf — Theme (with Unified Icon Sizes & Active State) ===== */
+:root{
+  --brand:#111827;
+  --brand-2:#0ea5e9;
+  --bg:#f8fafc;
+  --text:#111827;
+  --muted:#6b7280;
+  --surface:#ffffff;
+  --ring:rgba(14,165,233,.35);
+}
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Cairo",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  display:grid; grid-template-rows:auto 1fr auto; min-height:100dvh;
+}
+
+/* ===== Containers & Content ===== */
+.container{ max-width:1100px; margin-inline:auto; padding-inline:16px }
+main{ padding:20px 16px 100px }
+.card{
+  background:var(--surface);
+  border-radius:16px;
+  padding:16px;
+  border:1px solid rgba(2,132,199,.08);
+  box-shadow:0 6px 20px rgba(2,132,199,.08);
+}
+.card h2{ margin:0 0 8px; font-size:1.05rem }
+.muted{ color:var(--muted) }
+
+/* ===== Top Header ===== */
+.topbar{
+  position:sticky; top:0; z-index:20;
+  background: linear-gradient(180deg,#0ea5e9 0%, #0284c7 100%);
+  color:#fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  border-bottom-left-radius:18px;
+  border-bottom-right-radius:18px;
+}
+.topbar .hdr{
+  display:flex; align-items:center; justify-content:center;
+  min-height:65px;
+  padding:10px 0;
+}
+.topbar .brand{
+  font-weight:900; letter-spacing:.3px; font-size:1.3rem; text-align:center;
+}
+
+/* ===== Bottom Navigation ===== */
+.bottom-nav{
+  position:sticky; bottom:0; z-index:10;
+  width:100%;
+  background:var(--surface);
+  border-top:1px solid rgba(0,0,0,.08);
+  box-shadow:0 -8px 24px rgba(0,0,0,.1);
+  border-top-left-radius:18px; border-top-right-radius:18px;
+}
+.tabs{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  width:100%; margin:0 auto;
+}
+.tab{
+  position:relative;
+  -webkit-tap-highlight-color:transparent;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px; padding:10px 6px; min-height:56px;
+  color:var(--muted); text-decoration:none; font-weight:700; font-size:.86rem;
+  transition: color .3s ease, transform .2s ease;
+}
+.tab svg.icon{ 
+  width:26px; height:26px;
+  stroke: currentColor;
+  transition: transform .2s ease, opacity .2s ease, filter .3s ease, stroke .3s ease;
+}
+.tab:hover { color: var(--brand-2); }
+.tab:hover .icon { stroke: var(--brand-2); }
+.tab[aria-current="page"] { color: var(--brand-2); }
+.tab[aria-current="page"] .icon {
+  stroke: var(--brand-2);
+  opacity:1;
+  filter: drop-shadow(0 0 5px rgba(14,165,233,.4));
+}
+.tab::after{
+  content:""; position:absolute; bottom:6px; left:50%;
+  transform:translateX(-50%) scaleX(0);
+  width:28px; height:3px; border-radius:3px;
+  background: linear-gradient(90deg, #0ea5e9, #0284c7);
+  transition:transform .28s ease;
+}
+.tab[aria-current="page"]::after{ transform:translateX(-50%) scaleX(1) }
+
+/* ===== Views ===== */
+.view{ display:none }
+.view.active{ display:block }
+
+/* ===== Responsive ===== */
+/* Phone */
+@media (max-width:768px){
+  .tab-label{ display:none }
+  .tab{ min-height:54px; padding:10px 4px }      /* أقل ارتفاع */
+  .tab svg.icon{ width:26px; height:26px }       /* أيقونة أصغر سنة */
+  .tab::after{ bottom:6px; width:26px; height:3px }
+  .bottom-nav{ box-shadow:0 -4px 16px rgba(0,0,0,.08) } /* ظل أخف */
+
+  .topbar .hdr{ min-height:62px; padding:10px 0 }
+  .topbar .brand{ font-size:1.22rem }
+}
+
+/* Tablet */
+@media (min-width:769px) and (max-width:1024px){
+  .tab{ min-height:66px; padding:12px 6px }
+  .tab svg.icon{ width:30px; height:30px }
+  .tab::after{ bottom:10px; width:32px; height:4px }
+
+  .topbar .hdr{ min-height:68px; padding:12px 0 }
+  .topbar .brand{ font-size:1.35rem }
+}
+
+/* Larger screens */
+@media (min-width:1025px){
+  main{ padding-bottom:120px }
+  .topbar .brand{ font-size:1.4rem }
+  .tab svg.icon{ width:26px; height:26px }
+}
+/* مساحة هيرو مريحة */
+.home-hero{
+  min-height: calc(100dvh - 120px); /* تحت الهيدر وفوق البوتوم ناف */
+  display: grid;
+  align-content: start; /* كبداية للعمود */
+  gap: 14px;
+  padding-top: 14px;
+}
+
+/* شريط البحث (عرض كامل) */
+.search-bar{
+  display:flex; align-items:center; gap:8px;
+  background:var(--surface);
+  border-radius:999px;
+  padding:12px 14px;
+  border:1px solid rgba(2,132,199,.14);
+  box-shadow:0 6px 18px rgba(2,132,199,.08);
+}
+.search-bar input{
+  flex:1; border:none; outline:none; background:transparent;
+  font-size:1rem; color:var(--text);
+}
+.search-bar .icon-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:50%;
+  border:1px solid rgba(2,132,199,.14);
+  background:#fff; cursor:pointer;
+}
+.search-bar .icon{ width:22px; height:22px }
+
+/* كارت الدعوة */
+.auth-card .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:12px; text-decoration:none;
+  font-weight:800; font-size:.92rem; color:var(--brand); background:#eef6ff;
+  border:1px solid rgba(2,132,199,.18);
+}
+.btn.primary{ background:linear-gradient(180deg,#0ea5e9,#0284c7); color:#fff; border:none }
+/* إظهار/إخفاء كارت الدعوة بحسب حالة المستخدم */
+#auth-cta{ display:none }
+body.logged-out #auth-cta{ display:block }
+/* ====== Home: Full-width layout ====== */
+body[data-page="home"] main.container.container-fluid{
+  max-width: 100% !important;
+  padding-inline: 12px;   /* مسافة جانبية خفيفة */
+}
+
+/* شريط البحث بعرض كامل فعليًا */
+body[data-page="home"] .search-section,
+body[data-page="home"] .search-bar{
+  width: 100%;
+}
+
+/* الكروت تاخد العرض بالكامل */
+body[data-page="home"] .card{
+  width: 100%;
+  border-radius: 16px;
+}
+
+/* تحسين مسافات على الشاشات الكبيرة */
+@media (min-width: 1280px){
+  body[data-page="home"] main.container.container-fluid{
+    padding-inline: 24px;
+  }
+}
+
+/* تحسين موبايل صغير */
+@media (max-width: 480px){
+  body[data-page="home"] .search-bar{
+    padding: 10px 12px;
+  }
+}
+
+/* ==== Home-only overrides (safe patch) ==== */
+body[data-page="home"] main.container{
+  max-width: 100% !important;   /* يكسر حد الـ 1100px فقط في الهوم */
+  padding-inline: 12px;          /* حواف خفيفة يمين/شمال */
+}
+
+/* مساحة الهيرو تحت الهيدر وفوق البوتوم ناف */
+body[data-page="home"] .home-hero{
+  min-height: calc(100dvh - 120px);
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding-top: 14px;
+}
+
+/* شريط البحث فل-ويدث */
+body[data-page="home"] .search-section,
+body[data-page="home"] .search-bar{ width: 100% }
+
+body[data-page="home"] .search-bar{
+  display:flex; align-items:center; gap:8px;
+  background:var(--surface);
+  border-radius:999px;
+  padding:12px 14px;
+  border:1px solid rgba(2,132,199,.14);
+  box-shadow:0 6px 18px rgba(2,132,199,.08);
+}
+body[data-page="home"] .search-bar input{
+  flex:1; border:none; outline:none; background:transparent;
+  font-size:1rem; color:var(--text);
+}
+body[data-page="home"] .search-bar .icon-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:50%;
+  border:1px solid rgba(2,132,199,.14);
+  background:#fff; cursor:pointer;
+}
+body[data-page="home"] .search-bar .icon{ width:22px; height:22px }
+
+/* الكروت تاخد العرض كله */
+body[data-page="home"] .card{
+  width: 100%;
+  border-radius: 16px;
+}
+
+/* كارت التسجيل/الدخول */
+#auth-cta{ display:none }
+body.logged-out #auth-cta{ display:block }
+
+/* تحسينات بسيطة للمقاسات */
+@media (min-width:1280px){
+  body[data-page="home"] main.container{ padding-inline: 24px }
+}
+@media (max-width:480px){
+  body[data-page="home"] .search-bar{ padding:10px 12px }
+}
+
+
+
+/* ===== Intro & Features & Courses ===== */
+.intro-hero{
+  display:grid; gap:10px; align-content:start;
+  text-align:center;
+}
+.intro-hero .lead{ font-size:1.05rem; color:var(--muted) }
+.intro-hero .actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+
+.features-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+}
+.feature-item .fi-ico{ font-size:1.6rem; margin-bottom:6px }
+
+.courses h2{ margin:0 0 8px }
+.courses .hint{ margin-top:10px }
+.courses-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:8px;
+}
+.course-card{
+  display:grid; grid-template-rows:auto auto auto; gap:8px;
+  background:var(--surface);
+  border:1px solid rgba(2,132,199,.08);
+  border-radius:14px; padding:12px;
+  box-shadow:0 6px 20px rgba(2,132,199,.06);
+}
+.course-cover svg{ width:100%; height:auto; display:block; }
+.course-cover rect{ fill:rgba(2,132,199,.08) }
+.course-meta h3{ margin:0 0 4px; font-size:1rem }
+.course-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+
+.toast{
+  position:fixed; inset-inline:50%; bottom:90px; transform:translateX(-50%);
+  background:#111827; color:#fff; padding:8px 12px; border-radius:999px;
+  box-shadow:0 8px 20px rgba(0,0,0,.25); font-weight:700; font-size:.9rem; z-index:50;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1024px){
+  .features-grid{ grid-template-columns:repeat(3,1fr) }
+  .courses-grid{ grid-template-columns:repeat(2,1fr) }
+}
+@media (max-width: 640px){
+  .features-grid{ grid-template-columns:1fr; }
+  .courses-grid{ grid-template-columns:1fr; }
+}
+
+
+/* شبكة كورس واحد */
+.courses-grid.one{ grid-template-columns:1fr }
+.course-cover img{ width:100%; height:auto; border-radius:10px; display:block }
+/* ===== تحسين التباعد لقسم التعريف و الكروت ===== */
+.about-hero{
+  text-align:center;
+  display:grid;
+  gap:16px;              /* تباعد أوضح بين العنوان والنص */
+  align-content:start;
+  padding:40px 20px;     /* مسافة داخلية أكبر */
+  margin-bottom:32px;    /* مسافة أسفل الكتلة */
+}
+
+.about-hero .lead{
+  font-size:1.1rem;
+  line-height:1.7;
+  max-width:65ch;
+  margin-inline:auto;
+}
+
+/* تباعد للكروت */
+.kpi-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;              /* بدل 12px: تباعد أوضح بين الكروت */
+  margin-bottom:40px;    /* مسافة تحت السطر كله */
+}
+
+.kpi-card{
+  text-align:center;
+  padding:28px 20px;     /* Padding أكبر جوا الكارت */
+  border-radius:20px;
+  box-shadow:0 2px 6px rgba(0,0,0,.04); /* ظل خفيف */
+}
+
+.kpi-value{
+  font-weight:900;
+  font-size:1.8rem;
+  margin-bottom:6px;     /* مسافة تحت الرقم */
+}
+
+.kpi-label{
+  color:var(--muted);
+  font-size:1rem;
+}
+
+/* Responsive */
+@media (max-width:1024px){
+  .kpi-row{ grid-template-columns:repeat(2,1fr); gap:16px }
+}
+@media (max-width:640px){
+  .kpi-row{ grid-template-columns:1fr; gap:14px }
+}
+.course-actions .btn.primary{
+  display:block;
+  width:100%;
+  text-align:center;
+}

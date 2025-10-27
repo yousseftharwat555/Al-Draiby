@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لوحة تحكم الأدمن</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🦅</span>
+      <strong>لوحة التحكم</strong>
+    </div>
+    <div class="actions">
+      <button id="signOutBtn" class="btn btn-ghost">تسجيل الخروج</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card warning" id="adminGuardMsg" hidden>
+      <h3>تنبيه</h3>
+      <p>هذه الصفحة متاحة فقط لحسابات الأدمن. سيتم توجيهك لصفحة تسجيل الدخول.</p>
+    </section>
+
+
+    <section class="card">
+      <h2>إدارة المستخدمين</h2>
+      <div class="toolbar">
+        <div class="search">
+          <input id="searchInput" type="text" placeholder="ابحث بالاسم أو البريد (تصفية محلية)" />
+          <button id="clearSearch" class="btn btn-ghost">مسح</button>
+        </div>
+        <div class="filters">
+          <label><input type="checkbox" id="showOnlyBanned"> عرض المحظورين فقط</label>
+        </div>
+        <div class="ban-email">
+          <input id="banEmailInput" type="email" placeholder="حظر بريد إلكتروني" />
+          <button id="banEmailBtn" class="btn btn-danger">حظر البريد</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" id="usersTable" aria-label="Users table">
+      <thead>
+  <tr>
+    <th style="width:48px">تفاصيل</th>
+    <th>المستخدم</th>
+    <th>البريد</th>
+    <th>UID</th>
+    <th>الحالة</th>
+    <th>تاريخ الإنشاء</th>
+    <th>إجراءات</th>
+  </tr>
+</thead>
+
+          <tbody id="usersTbody">
+            <tr><td colspan="6" style="text-align:center">جارِ التحميل...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <button id="loadMoreBtn" class="btn">تحميل المزيد</button>
+        <span id="rowsCount" class="muted"></span>
+      </div>
+    </section>
+  </main>
+
+  <script src="./firebase-config.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

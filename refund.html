@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>استرداد الأموال</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Tajawal", sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      color: #444;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .note {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>طلب استرداد الأموال</h1>
+    <form action="process_refund.php" method="post">
+      <label for="name">الاسم الكامل</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="order">رقم الطلب</label>
+      <input type="text" id="order" name="order" required>
+
+      <label for="reason">سبب الاسترداد</label>
+      <select id="reason" name="reason" required>
+        <option value="">-- اختر السبب --</option>
+        <option value="منتج تالف">المنتج تالف</option>
+        <option value="طلب خاطئ">طلب خاطئ</option>
+        <option value="لم أستلم المنتج">لم أستلم المنتج</option>
+        <option value="أخرى">أخرى</option>
+      </select>
+
+      <label for="details">تفاصيل إضافية</label>
+      <textarea id="details" name="details" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+
+      <button type="submit">إرسال الطلب</button>
+    </form>
+    <p class="note">سيتم مراجعة طلبك خلال 3-5 أيام عمل وسيتم التواصل معك عبر البريد الإلكتروني.</p>
+  </div>
+</body>
+</html>

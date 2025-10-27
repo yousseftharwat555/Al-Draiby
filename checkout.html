@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>شراء الكورس</title>
+  <style>
+    :root{
+      --primary:#0b7; /* teal */
+      --primary-dark:#086;
+      --bg:#ffffff; /* خلفية بيضاء */
+      --text:#111111; /* نص غامق */
+      --muted:#333333;
+      --card:#ffffff;
+      --border:#e6e6ea;
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    .container{
+      max-width:760px; margin:40px auto; padding:0 16px;
+    }
+    .header{
+      text-align:center; margin-bottom:24px;
+    }
+    .brand{
+      display:inline-flex; align-items:center; gap:10px; padding:10px 16px; background:#e8fff6; color:#055; border-radius:999px; font-weight:700; font-size:14px;
+      border:1px solid #d7f7ee;
+    }
+    h1{ margin:16px 0 8px; font-size:28px; }
+    .sub{ color:var(--muted); font-size:15px; }
+
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      box-shadow:0 4px 12px rgba(0,0,0,.08); padding:22px; margin-top:18px;
+    }
+
+    label{ display:block; font-weight:700; margin-bottom:8px; }
+    input[type="text"]{
+      width:100%; padding:14px 16px; border:1px solid var(--border); border-radius:12px; font-size:16px;
+      outline:none; transition: box-shadow .2s, border-color .2s; background:#fff;
+    }
+    input[type="text"]:focus{ border-color:var(--primary); box-shadow:0 0 0 4px rgba(0,187,119,.12) }
+
+    .row{ display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;
+      padding:12px 16px; border-radius:12px; border:1px solid transparent; font-weight:700; text-decoration:none; 
+      transition: transform .04s ease, background .2s, border-color .2s; user-select:none;
+    }
+    .btn:active{ transform:translateY(1px) }
+    .btn-primary{ background:var(--primary); color:#fff; }
+    .btn-primary:hover{ background:var(--primary-dark) }
+    .btn-ghost{ background:#fff; border-color:var(--border); color:#333; }
+
+    .status{ margin-top:12px; font-size:14px; color:var(--muted); min-height:22px; }
+    .status.success{ color:#067a5b; }
+    .status.error{ color:#b00020; }
+
+    .whatsapp{
+      display:flex; align-items:center; gap:12px; padding:14px; background:#f9f9f9; border:1px dashed #b7b7b7;
+      border-radius:14px; margin-top:10px; 
+    }
+    .wa-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+
+    .small{ font-size:13px; color:var(--muted); }
+    .footer{ text-align:center; margin-top:20px; color:var(--muted); font-size:13px; }
+    .link{ color:var(--primary-dark); text-decoration:none; border-bottom:1px dashed #9adbc6; }
+
+    .divider{ display:flex; align-items:center; gap:10px; margin:18px 0; color:#888; font-size:13px; }
+    .divider::before, .divider::after{ content:""; height:1px; flex:1; background:var(--border); }
+    .hint{ font-size:12px; color:#555; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span class="brand">🎓 كورساتك</span>
+      <h1>شراء الكورس</h1>
+      <p class="sub">إذا كان لديك كود تفعيل، أدخِله بالأسفل. وإن لم يكن لديك، يمكنك شراء كود عبر واتساب.</p>
+    </div>
+
+    <!-- كارت إدخال الكود -->
+    <div class="card">
+      <form id="code-form" novalidate>
+        <label for="code">أدخل الكود</label>
+        <input 
+          id="code" name="code" type="text" inputmode="text" autocomplete="one-time-code" 
+          placeholder="مثال: ABCD-1234" aria-describedby="code-hint" maxlength="32" required />
+        <div id="code-hint" class="hint">أدخل الكود كما وصل إليك (أحرف لاتينية وأرقام).</div>
+
+        <div class="row">
+          <button class="btn btn-primary" type="submit">تحقُّق من الكود</button>
+          <button class="btn btn-ghost" type="button" id="clear-btn">مسح الحقل</button>
+        </div>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <div class="divider">أو</div>
+
+    <!-- كارت شراء الكود عبر واتساب -->
+    <div class="card">
+      <h2 style="margin-top:0">لا تملك كودًا؟</h2>
+      <p>لشراء كود خاص بالكورس، تواصل معنا مباشرة عبر واتساب.</p>
+      <div class="whatsapp">
+        <div style="font-weight:700"> واتساب:</div>
+        <div>
+          <div class="wa-actions">
+            <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/201050968037">تواصل عبر واتساب</a>
+            <a class="btn btn-ghost" href="tel:01050968037">اتصال هاتفي</a>
+            <button class="btn btn-ghost" id="copy-btn" type="button">نسخ الرقم</button>
+          </div>
+        </div>
+      </div>
+      <p class="small" style="margin-top:10px;">
+        ملاحظة: الرابط يفتح محادثة واتساب مباشرة. إذا لم يعمل، أضف الرقم يدويًا إلى جهات الاتصال ثم ابحث عنه في واتساب.
+      </p>
+    </div>
+
+    <div class="footer">
+      <span class="small">بحاجة للمساعدة؟ راسلنا على الواتساب. &nbsp;•&nbsp; 
+        <a class="link" href="refund.html">سياسة الاسترداد</a></span>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const form = document.getElementById('code-form');
+      const input = document.getElementById('code');
+      const status = document.getElementById('status');
+      const clearBtn = document.getElementById('clear-btn');
+      const copyBtn = document.getElementById('copy-btn');
+
+      input.addEventListener('input', (e)=>{
+        const caret = e.target.selectionStart;
+        e.target.value = e.target.value.toUpperCase().replace(/\s+/g, '').replace(/[^A-Z0-9-]/g, '');
+        e.target.setSelectionRange(caret, caret);
+      });
+
+      clearBtn.addEventListener('click', ()=>{ input.value=''; input.focus(); status.textContent=''; status.className='status'; });
+
+      copyBtn.addEventListener('click', async ()=>{
+        try{
+          await navigator.clipboard.writeText('01050968037');
+          toast('تم نسخ الرقم إلى الحافظة ✅');
+        }catch{ toast('تعذّر نسخ الرقم، جرّب يدويًا.'); }
+      });
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const code = (input.value || '').trim();
+        if(!code){
+          setStatus('يرجى إدخال الكود أولًا.', 'error');
+          input.focus();
+          return;
+        }
+        setStatus('جارٍ التحقق من الكود…', '');
+        await delay(600);
+        setStatus('تم إرسال الكود للتحقق. اربطه بنقطة النهاية الخاصة بك لإتمام التفعيل.', 'success');
+      });
+
+      function setStatus(msg, type){
+        status.textContent = msg;
+        status.className = 'status' + (type ? ' ' + type : '');
+      }
+      function delay(ms){ return new Promise(r=>setTimeout(r, ms)); }
+
+      const toastEl = document.createElement('div');
+      Object.assign(toastEl.style, {position:'fixed', inset:'auto 16px 16px auto', padding:'12px 14px', background:'rgba(0,0,0,.8)', color:'#fff', borderRadius:'12px', fontSize:'14px', opacity:'0', transform:'translateY(6px)', transition:'all .25s', zIndex:9999});
+      document.body.appendChild(toastEl);
+      let toastTimer;
+      function toast(text){
+        toastEl.textContent = text;
+        toastEl.style.opacity = '1'; toastEl.style.transform = 'translateY(0)';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(()=>{ toastEl.style.opacity='0'; toastEl.style.transform='translateY(6px)'; }, 1800);
+      }
+    })();
+  </script>
+</body>
+</html>

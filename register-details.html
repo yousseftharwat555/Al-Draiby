@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EagleWolf — استكمال البيانات</title>
+    <link rel="stylesheet" href="eaglewolf.css" />
+    <link rel="stylesheet" href="register.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container hdr"><div class="brand">EagleWolf</div></div>
+    </header>
+
+    <main class="auth-screen">
+      <form id="detailsForm" class="auth-card" novalidate>
+        <div class="auth-head">
+          <h1 class="auth-title">استكمال البيانات</h1>
+          <p class="auth-sub">من فضلك أدخل بياناتك بدقة لاستكمال إنشاء الحساب</p>
+        </div>
+
+        <div class="form-grid two">
+          <div>
+            <label for="firstName">الاسم</label>
+            <input id="firstName" type="text" required placeholder="الاسم الأول" autocomplete="given-name" />
+          </div>
+          <div>
+            <label for="fatherName">اسم الوالد</label>
+            <input id="fatherName" type="text" required placeholder="اسم الأب" />
+          </div>
+          <div>
+            <label for="phone">رقم التلفون</label>
+            <input id="phone" type="tel" required placeholder="01012345678" autocomplete="tel" />
+          </div>
+          <div>
+            <label for="gov">المحافظة</label>
+            <select id="gov" required>
+              <option value="" selected disabled>اختر المحافظة</option>
+              <option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option>
+              <option>الدقهلية</option><option>الشرقية</option><option>المنوفية</option>
+              <option>الغربية</option><option>البحيرة</option><option>سوهاج</option>
+              <option>أسيوط</option><option>المنيا</option><option>قنا</option>
+              <option>أسوان</option><option>بورسعيد</option><option>الإسماعيلية</option>
+              <option>السويس</option><option>دمياط</option><option>الفيوم</option>
+              <option>بني سويف</option><option>كفر الشيخ</option><option>مطروح</option>
+              <option>شمال سيناء</option><option>جنوب سيناء</option><option>البحر الأحمر</option>
+              <option>الأقصر</option>
+            </select>
+          </div>
+
+          <!-- النوع -->
+          <div style="grid-column: 1 / -1">
+            <label>النوع</label>
+            <div class="gender-group">
+              <label class="gender-option">
+                <input type="radio" name="gender" id="genderMale" value="male" required />
+                <span>ذكر</span>
+              </label>
+              <label class="gender-option">
+                <input type="radio" name="gender" id="genderFemale" value="female" required />
+                <span>أنثى</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- حقل كود الدعوة / ID الصديق (اختياري) -->
+          <div style="grid-column: 1 / -1">
+            <label for="refCode">كود الدعوة / ID الصديق (اختياري)</label>
+            <input id="refCode" type="text" placeholder=" ID صديقك" />
+            <p class="hint" style="margin-top:6px">
+              عند إدخال كود صحيح سيتم تسجيل أن صاحب الكود هو من دعاك.
+            </p>
+          </div>
+        </div>
+
+        <button class="btn-primary" type="submit">إرسال البيانات</button>
+        <p id="dmsg" class="hint" aria-live="polite"></p>
+
+        <div class="auth-footer">
+          <a href="register.html">رجوع لخطوة إنشاء الحساب</a>
+        </div>
+      </form>
+    </main>
+
+    <!-- لا نحمّل أي firebase-config خارجي هنا؛ السكربت فيه التهيئة -->
+    <script type="module" src="register-details.js"></script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+/* حاوية شاشة كاملة في صفحات auth */
+.auth-screen{
+min-height: calc(100dvh - 56px - 0px);
+display: grid; place-items: center;
+padding: 24px 16px 32px;
+}
+
+/* البطاقة */
+.auth-card{
+width: 100%; max-width: 520px;
+background: var(--surface);
+border: 1px solid rgba(2,132,199,.10);
+box-shadow: 0 16px 40px rgba(2,132,199,.12);
+border-radius: 18px;
+padding: 22px; display: grid; gap: 14px;
+}
+
+/* عنوان ووصف أعلى النموذج */
+.auth-head{ text-align:center; margin-bottom: 4px }
+.auth-title{ margin:0; font-size:1.35rem; font-weight:900; color:#0e7490 }
+.auth-sub{ margin:6px 0 0; color:var(--muted); font-size:.95rem }
+
+/* الحقول */
+.auth-card label{ font-weight:700; font-size:.95rem }
+.auth-card input, .auth-card select{
+padding: 12px 12px; border-radius: 12px; border:1px solid rgba(0,0,0,.12);
+background:#fff; outline:none; font-size:1rem; width:100%;
+transition: box-shadow .2s ease, border-color .2s ease;
+}
+.auth-card input:focus, .auth-card select:focus{ border-color: var(--brand-2); box-shadow: 0 0 0 3px var(--ring) }
+
+/* أزرار */
+.btn-primary{
+background: linear-gradient(180deg,#0ea5e9 0%, #0284c7 100%);
+color:#fff; border:none; border-radius: 12px; padding: 12px; font-weight:800; cursor:pointer;
+transition: filter .2s ease, transform .05s ease;
+}
+.btn-primary:hover{ filter: brightness(1.05) }
+.btn-primary:active{ transform: translateY(1px) }
+
+.btn-outline{ background:#fff; color:#0284c7; border:1px solid #0284c7; border-radius:12px; padding:10px 12px; font-weight:800; cursor:pointer }
+
+/* رسائل مساعدة */
+.hint{ color: var(--muted); text-align:center; min-height: 20px }
+.verify-box{ background:#f0f9ff; border:1px solid #bae6fd; padding:12px; border-radius:12px; margin-top:8px }
+
+/* تقسيم صفوف ثنائية في صفحة التفاصيل */
+.form-grid{ display:grid; gap:12px }
+@media (min-width: 640px){
+.form-grid.two{ grid-template-columns: 1fr 1fr }
+}
+
+/* تذييل بسيط تحت الفورم (روابط مساعدة) */
+.auth-footer{ text-align:center; color:var(--muted); font-size:.95rem; margin-top: 4px }
+.auth-footer a{ color:#0284c7; text-decoration:none; font-weight:800 }
+.auth-footer a:hover{ text-decoration:underline }
+
+#refCode { text-transform: uppercase }
+#refCode::placeholder { text-transform: none }
+
+.gender-group{ display:flex; gap:14px; flex-wrap:wrap; margin-top:6px; }
+.gender-option{
+  display:flex; align-items:center; gap:8px;
+  padding:10px 12px; border:1px solid rgba(0,0,0,.12);
+  border-radius:12px; background:#fff; cursor:pointer;
+}
+.gender-option input{ accent-color:#0ea5e9; }
+.gender-option:hover{ box-shadow:0 0 0 3px var(--ring); border-color:var(--brand-2) }
+
+/* تحسين بسيط عند التعطيل */
+.btn-primary[disabled]{ opacity:.85; cursor:default }

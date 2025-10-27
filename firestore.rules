@@ -1,0 +1,105 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /* ===== Helpers ===== */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isSelf(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+    // الأدمن = وجود وثيقة باسمه في admins/{uid}
+    function isAdmin() {
+      return isSignedIn() &&
+             exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    /* ===== users/{uid} =====
+       - المالك يقرأ ويعدّل (بقيود)
+       - الأدمن يقرأ ويعدّل بحرية (للوحة الأدمن) */
+    match /users/{uid} {
+      allow read: if isSelf(uid) || isAdmin();
+      allow create: if isSelf(uid);
+
+      // تحديث:
+      allow update: if
+        isAdmin() || (         // الأدمن: صلاحية كاملة
+        isSelf(uid) &&         // المالك نفسه مع القيود التالية:
+        // منع تعديل role/status بواسطة المستخدم نفسه
+        (!('role' in request.resource.data)   || request.resource.data.role   == resource.data.role) &&
+        (!('status' in request.resource.data) || request.resource.data.status == resource.data.status) &&
+        // invitedByUid/ invitedByReferralId : write-once
+        (
+          !('invitedByUid' in request.resource.data) ||
+          request.resource.data.invitedByUid == resource.data.invitedByUid ||
+          !('invitedByUid' in resource.data)
+        ) &&
+        (
+          !('invitedByReferralId' in request.resource.data) ||
+          request.resource.data.invitedByReferralId == resource.data.invitedByReferralId ||
+          !('invitedByReferralId' in resource.data)
+        )
+      );
+    }
+
+    /* ===== codes/{CODE} =====
+       - القراءة لأي مستخدم مسجّل (لصفحة الدعوة)
+       - الأدمن: حرية كاملة create/update/delete (لوحة الأدمن)
+       - المالك: مسموح له إنشاء وثيقة كوده لأول مرة وكتابة بيانات العرض
+       - المستردّ: مسموح له فقط زيادة العداد + ختم آخر مسترد */
+    match /codes/{CODE} {
+      allow read: if isSignedIn();
+
+      // إنشاء بواسطة الأدمن أو مالك الكود
+      allow create: if
+        isAdmin() ||
+        (
+          isSignedIn() &&
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.referralId == CODE &&
+          request.resource.data.ownerUid == request.auth.uid &&
+          request.resource.data.usageCount == 0
+        );
+
+      // تحديث:
+      allow update: if
+        // 1) الأدمن حر
+        isAdmin()
+        ||
+        // 2) تحديث العدّاد عند الاسترداد (أي مستخدم)
+        (
+          isSignedIn() &&
+          request.resource.data.diff(resource.data).changedKeys().hasOnly(
+            ['usageCount','lastRedeemerUid','lastRedeemedAt']
+          ) &&
+          request.resource.data.usageCount == resource.data.usageCount + 1 &&
+          request.resource.data.lastRedeemerUid == request.auth.uid
+        )
+        ||
+        // 3) المالك يحدّث معلومات العرض العامة لكوده (الاسم/الإيميل/التفعيل/حد الاستخدام)
+        (
+          isSignedIn() &&
+          request.auth.uid == resource.data.ownerUid &&
+          request.resource.data.diff(resource.data).changedKeys().subsetOf(
+            ['ownerName','ownerEmail','isActive','maxUses']
+          )
+        );
+
+      // حذف: للأدمن فقط
+      allow delete: if isAdmin();
+    }
+
+    /* ===== admins/{uid} =====
+       إدارة قائمة الأدمن من داخل لوحة الأدمن فقط */
+    match /admins/{adminUid} {
+      allow read, create, update, delete: if isAdmin();
+    }
+
+    /* ===== blockedEmails/{id} =====
+       لوحة الأدمن تحتاج قراءة/كتابة هنا */
+    match /blockedEmails/{id} {
+      allow read, create, update, delete: if isAdmin();
+    }
+  }
+}

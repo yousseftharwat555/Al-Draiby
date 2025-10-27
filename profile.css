@@ -1,0 +1,218 @@
+
+/* شاشة كاملة بإحساس iOS */
+.ios-screen{
+  background: var(--bg);
+  padding-bottom: 88px; /* مساحة للبوتوم ناف */
+}
+
+/* Large Title */
+.ios-title-wrap{ padding: 18px 16px 6px }
+.ios-title{
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: .2px;
+  color: #0f172a;
+}
+
+/* بطاقة بسيطة (iOS Card) */
+.ios-card{
+  background: var(--surface);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.04);
+}
+
+/* Header Row (أفاتار + الاسم) */
+.ios-header{ padding: 14px }
+.ios-header-row{ display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center }
+.ios-avatar{
+  width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg,#0ea5e9,#0284c7);
+  color: #fff; box-shadow: 0 8px 20px rgba(2,132,199,.18);
+}
+.ios-header-col{ display: grid; gap: 6px; min-width: 0 }
+
+/* اسم المستخدم: نلتقط أول سطر بيولده JS (مرحبًا، {الاسم}) */
+#headerArea .hello,
+#headerArea > div:first-child{
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #0f172a;
+}
+
+/* سطر الـID + زر النسخ (صغير) */
+#headerArea .id-line{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#headerArea .hint-row{
+  font-size: .88rem;
+  color: var(--muted);
+}
+#ridVal{
+  font-size: .9rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+.copy-btn{
+  font-size: .86rem;
+  padding: 4px 8px;
+  border-radius: 999px; /* كبسولة صغيرة */
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.12);
+  color: #0284c7;
+  font-weight: 800;
+}
+
+/* إخفاء أي نص تنبيهي قديم غير مرغوب */
+#headerArea > .hero-note,
+#headerArea > .hint-row:last-child{ display: none }
+
+/* ===== Grouped Lists (iOS Settings style) ===== */
+.ios-group{
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.06);
+  background: var(--surface);
+  box-shadow: 0 10px 24px rgba(0,0,0,.04);
+}
+
+.ios-cell{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  background: #fff;
+  transition: background .15s ease;
+}
+.ios-cell:last-child{ border-bottom: none }
+.ios-cell:hover{ background: #f9fafb }
+
+.cell-text{ min-width: 0 }
+.cell-title{
+  font-weight: 800;
+  color: #0f172a;
+  font-size: 1rem;
+}
+.cell-sub{
+  font-size: .94rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.cell-chevron{
+  color: #94a3b8;
+  font-weight: 900;
+}
+
+/* Footer (Logout) */
+.ios-footer{
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  padding: 14px;
+}
+.ios-danger{
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  min-width: 220px;
+  box-shadow: 0 10px 24px rgba(239,68,68,.20);
+}
+.ios-danger:hover{ filter: brightness(1.05) }
+
+/* ===== Responsive Tweaks ===== */
+@media (max-width: 640px){
+  .ios-title{ font-size: 1.4rem }
+  .ios-header-row{ gap: 10px }
+  .ios-avatar{ width: 52px; height: 52px }
+  #headerArea .hello, #headerArea > div:first-child{ font-size: 1.05rem }
+  #ridVal, .copy-btn, #headerArea .hint-row{ font-size: .85rem }
+}
+
+.ios-footer .ios-danger{ width:100%; max-width:100%; display:block; }
+
+
+/* ==== UX Additions ==== */
+
+/* سطر البريد + الشارات + معلومات إضافية بالهيدر */
+#headerArea .email-line{
+  font-size: .92rem;
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:4px }
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  background:#f1f5f9; color:#0f172a; border:1px solid rgba(0,0,0,.06);
+  border-radius:999px; padding:6px 10px; font-size:.85rem; font-weight:800;
+}
+.badge-dot{ width:8px; height:8px; border-radius:50%; background:#10b981 }
+
+/* زر رابط تحذيري */
+.link-danger{
+  background:transparent; border:none; cursor:pointer; font-weight:900;
+  color:#ef4444; padding:6px 0; text-decoration:underline;
+}
+
+/* Toast بسيط */
+.toast{
+  position: fixed; inset-inline: 50%; bottom: 82px; transform: translateX(-50%) translateY(20px);
+  min-width: 220px; max-width: 92vw;
+  background: #0f172a; color:#fff; border-radius: 999px; padding: 10px 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease;
+  text-align:center; font-weight:800; font-size:.92rem;
+}
+.toast.show{ opacity:1; transform: translateX(-50%) translateY(0) }
+/* ===== Logged-out state tweaks ===== */
+body.logged-out .ios-avatar{ display:none; }
+
+/* لما الأفاتار يختفي خليه عمود واحد */
+body.logged-out .ios-header-row{
+  grid-template-columns: 1fr;
+}
+
+/* مساحة أزرار الدخول/التسجيل */
+.auth-actions{
+  display:grid;
+  gap:12px;
+  padding:8px 0 4px;
+  justify-items:center; /* توسيط الأزرار */
+}
+
+/* الأزرار تبقى عريضة ومتناسقة */
+.auth-actions .btn-outline,
+.auth-actions .btn-primary{
+  width:100%;
+  max-width:420px;
+  display:inline-block;
+  text-align:center;
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:800;
+  box-sizing:border-box;
+}
+
+/* موبايل صغير: اسمك، الرسائل، وكل شيء يبقى مريح */
+@media (max-width: 420px){
+  .auth-actions .btn-outline,
+  .auth-actions .btn-primary{
+    max-width:100%;
+  }
+}
+
+

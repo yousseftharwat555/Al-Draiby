@@ -1,0 +1,179 @@
+:root{
+  --brand:#111827;
+  --brand-2:#0ea5e9;
+  --bg:#f8fafc;
+  --text:#111827;
+  --muted:#6b7280;
+  --surface:#ffffff;
+}
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Cairo",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  display:grid; grid-template-rows:auto 1fr auto; min-height:100dvh;
+}
+
+.container{ max-width:1000px; margin-inline:auto; padding:16px 16px 96px }
+.card{
+  background:var(--surface);
+  border-radius:16px;
+  padding:16px;
+  border:1px solid rgba(2,132,199,.08);
+  box-shadow:0 6px 20px rgba(2,132,199,.08);
+}
+.section-title{ margin:0 0 10px; font-size:1.2rem }
+
+/* أزرار */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:12px; text-decoration:none;
+  font-weight:800; font-size:.95rem; color:var(--surface); background:var(--brand-2);
+  border:1px solid rgba(2,132,199,.18);
+}
+.btn.primary{ background:linear-gradient(180deg,#0ea5e9,#0284c7); border:none }
+.btn.big{ padding:12px 18px; font-size:1rem; border-radius:14px }
+
+/* الهيدر الصغير */
+.topbar{
+  position:sticky; top:0; z-index:20;
+  background: linear-gradient(180deg,#0ea5e9 0%, #0284c7 100%);
+  color:#fff; box-shadow:0 6px 18px rgba(0,0,0,.12);
+  border-bottom-left-radius:18px; border-bottom-right-radius:18px;
+}
+.topbar .hdr{ display:flex; align-items:center; justify-content:center; min-height:52px; padding:4px 0 }
+.topbar .brand{ font-weight:900; letter-spacing:.3px; font-size:1.08rem }
+
+/* البار السفلي */
+.bottom-nav{
+  position:sticky; bottom:0; z-index:10; width:100%;
+  background:#fff; border-top:1px solid rgba(0,0,0,.08);
+  box-shadow:0 -8px 24px rgba(0,0,0,.1);
+  border-top-left-radius:18px; border-top-right-radius:18px;
+}
+.tabs{ display:grid; grid-template-columns:repeat(3,1fr) }
+.tab{
+  position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px; padding:8px 6px; min-height:52px; color:#6b7280; text-decoration:none; font-weight:700; font-size:.86rem;
+}
+.tab svg.icon{ width:24px; height:24px; stroke: currentColor; }
+.tab[aria-current="page"]{ color:var(--brand-2) }
+
+/* ===== صفحة الكورس ===== */
+.course-hero{
+  display:grid; gap:16px; align-items:start;
+  grid-template-columns: 1fr;
+}
+.course-image{
+  width:100%; max-height:240px; object-fit:cover; border-radius:12px;
+}
+.course-title{ margin:0 0 10px; font-size:1.65rem; font-weight:900; color:var(--brand) }
+.course-sub{ margin:0 0 14px; color:var(--muted); line-height:1.7 }
+
+.course-meta{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:0 0 12px;
+}
+.meta-item{ background:#f9fafb; border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:10px 12px }
+.meta-label{ display:block; font-size:.78rem; color:var(--muted) }
+.meta-value{ font-weight:800 }
+
+/* CTA الشراء */
+.purchase-cta{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:8px
+}
+.price{
+  display:flex; flex-direction:column; align-items:flex-start; gap:2px;
+  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:8px 12px
+}
+.amount{ font-weight:900; font-size:1.45rem; line-height:1 }
+.currency{ font-size:.9rem; margin-inline-start:2px }
+.note{ color:var(--muted); font-size:.8rem }
+
+/* أكورديون المنهج */
+.accordion-toggle{
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  background:#eef6ff; color:var(--brand); border:1px solid rgba(2,132,199,.18);
+  border-radius:12px; padding:12px 14px; font-weight:900; cursor:pointer; margin-top:8px;
+}
+.acc-head{ display:flex; flex-direction:column; gap:2px }
+.accordion-toggle .chev{ transition:transform .25s ease }
+.accordion-toggle[aria-expanded="true"] .chev{ transform:rotate(180deg) }
+.accordion-panel{ margin:10px 0 0 }
+.modules-list{
+  list-style:none; margin:0; padding:0; display:grid; gap:8px;
+}
+.modules-list > li{
+  background:#ffffff; border:1px solid rgba(0,0,0,.06); border-radius:10px; padding:10px 12px;
+}
+
+/* آراء المتدربين */
+.reviews .reviews-grid{
+  display:grid; gap:12px; grid-template-columns: 1fr;
+}
+.reviews blockquote{
+  margin:0; padding:14px 16px; border-radius:14px;
+  background:#ffffff; border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 4px 12px rgba(2,132,199,.06);
+}
+.reviews footer{ margin-top:8px; color:var(--muted); font-size:.9rem }
+
+/* المدرب */
+.instructor .instructor-row{ display:flex; gap:12px; align-items:center }
+.instructor .avatar{
+  width:90px; height:90px; border-radius:10%;
+  object-fit:cover; border:1px solid rgba(0,0,0,.08)
+}
+
+/* شاشات أوسع */
+@media (min-width:900px){
+  .course-hero{ grid-template-columns: .9fr 1.1fr }
+  .course-title{ font-size:1.9rem }
+  .course-image{ max-height:260px }
+  .reviews .reviews-grid{ grid-template-columns: repeat(3,1fr) }
+}
+main.container{
+  display: grid;
+  /* المسافة بين كل عنصر والتاني (الكروت/الأقسام) */
+  gap: 22px;
+}
+
+/* مساحة داخلية خفيفة أعلى/أسفل كل كارت علشان مايبانوش لازقين */
+.card{ 
+  padding: 18px;
+  border-radius: 16px;
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 6px 18px rgba(2,132,199,.07);
+}
+
+/* مسافة إضافية أسفل الـ hero قبل باقي الصفحة */
+.course-hero{ 
+  gap: 18px;                 /* بين صورة الكورس والنص */
+}
+
+/* تحسين تباعد الميتاداتا */
+.course-meta{ 
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* أكورديون المنهج: فواصل أوضح بين الرأس والمحتوى وبين القسمين */
+.modules .accordion-toggle{
+  margin-top: 6px;           /* مسافة صغيرة فوق كل زر */
+}
+.modules .accordion-toggle + .accordion-toggle{
+  margin-top: 10px;          /* مسافة بين زر المستوى الأول والثاني */
+}
+.modules .accordion-panel{
+  margin-top: 10px;          /* مسافة بين الزر والقائمة */
+}
+
+/* آراء المتدربين: شبكة بفواصل مريحة */
+.reviews .reviews-grid{
+  gap: 14px;
+}
+
+/* قسم المدرب: مسافة بين الصورة والنص محفوظة */
+.instructor .instructor-row{
+  gap: 14px;
+}
